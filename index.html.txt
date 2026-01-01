@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cricket Auction</title>
+</head>
+<body>
+  <h2>🏏 Live Auction</h2>
+  <button>SOLD</button>
+</body>
+</html>
