@@ -1,11 +1,126 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cricket Auction</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      padding: 16px;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 10px;
+    }
+
+    select, input {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 6px;
+    }
+
+    .row {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    button {
+      flex: 1;
+      padding: 14px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .sold {
+      background: #2e7d32;
+      color: white;
+    }
+
+    .undo {
+      background: #c62828;
+      color: white;
+    }
+
+    .status {
+      margin-top: 10px;
+      font-weight: bold;
+      text-align: center;
+      color: #333;
+    }
+  </style>
 </head>
+
 <body>
-  <h2>🏏 Live Auction</h2>
-  <button>SOLD</button>
+
+  <h2>🏏 Live Cricket Auction</h2>
+
+  <div class="card">
+    <label>Player Name</label>
+    <div id="playerName">Sunil Maniar</div>
+
+    <label>Player Category</label>
+    <div id="playerCategory">A</div>
+
+    <label>Base Price</label>
+    <div id="basePrice">₹ 4,00,000</div>
+  </div>
+
+  <div class="card">
+    <label>Select Team</label>
+    <select id="teamSelect">
+      <option value="">-- Select Team --</option>
+      <option>Team Phoenix</option>
+      <option>Seven Storms</option>
+      <option>Team Legends</option>
+      <option>Beeduus United</option>
+      <option>Bhoomi Stars</option>
+    </select>
+
+    <label>Bid Amount</label>
+    <input type="number" id="bidAmount" placeholder="Enter bid amount">
+  </div>
+
+  <div class="row">
+    <button class="sold" onclick="sellPlayer()">SOLD</button>
+    <button class="undo" onclick="undoSale()">UNDO</button>
+  </div>
+
+  <div class="status" id="statusMsg">
+    Status: READY
+  </div>
+
+<script>
+  function sellPlayer() {
+    document.getElementById("statusMsg").innerText =
+      "Status: SOLD button pressed";
+  }
+
+  function undoSale() {
+    document.getElementById("statusMsg").innerText =
+      "Status: UNDO button pressed";
+  }
+</script>
+
 </body>
 </html>
