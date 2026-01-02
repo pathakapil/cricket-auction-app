@@ -5,70 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cricket Auction</title>
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f6f8;
-      padding: 16px;
-    }
-
-    h2 {
-      text-align: center;
-    }
-
-    .card {
-      background: #ffffff;
-      border-radius: 10px;
-      padding: 16px;
-      margin-bottom: 14px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-
-    label {
-      font-weight: bold;
-      display: block;
-      margin-top: 10px;
-    }
-
-    select, input {
-      width: 100%;
-      padding: 10px;
-      font-size: 16px;
-      margin-top: 6px;
-    }
-
-    .row {
-      display: flex;
-      gap: 10px;
-      margin-top: 12px;
-    }
-
-    button {
-      flex: 1;
-      padding: 14px;
-      font-size: 18px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    .sold {
-      background: #2e7d32;
-      color: white;
-    }
-
-    .undo {
-      background: #c62828;
-      color: white;
-    }
-
-    .status {
-      margin-top: 10px;
-      font-weight: bold;
-      text-align: center;
-      color: #333;
-    }
-  </style>
+  <!-- Link CSS -->
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -110,17 +48,8 @@
     Status: READY
   </div>
 
-<script>
-  function sellPlayer() {
-    document.getElementById("statusMsg").innerText =
-      "Status: SOLD button pressed";
-  }
-
-  function undoSale() {
-    document.getElementById("statusMsg").innerText =
-      "Status: UNDO button pressed";
-  }
-</script>
+  <!-- Link JS -->
+  <script src="app.js"></script>
 
 </body>
 </html>
