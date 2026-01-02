@@ -16,59 +16,74 @@ const wallets = {
   "Bhoomi Stars": 2000000
 };
 
-function formatMoney(amount) {
-  return "₹ " + amount.toLocaleString("en-IN");
+function formatMoney(v) {
+  return "₹ " + v.toLocaleString("en-IN");
 }
 
 function loadPlayer() {
   const p = players[currentIndex];
-
   document.getElementById("playerName").innerText = p.name;
   document.getElementById("playerCategory").innerText = p.category;
   document.getElementById("basePrice").innerText = formatMoney(p.base);
-
   document.getElementById("teamSelect").value = "";
   document.getElementById("bidAmount").value = "";
   document.getElementById("statusMsg").innerText = "Status: READY";
-
   renderWallets();
 }
 
 function renderWallets() {
   let html = "";
-  for (let team in wallets) {
-    html += `<p><b>${team}</b>: ${formatMoney(wallets[team])}</p>`;
+  for (let t in wallets) {
+    html += `<p><b>${t}</b>: ${formatMoney(wallets[t])}</p>`;
   }
   document.getElementById("wallets").innerHTML = html;
+}
+
+function renderHistory() {
+  const tbody = document.querySelector("#historyTable tbody");
+  tbody.innerHTML = "";
+  history.forEach(h => {
+    const row = `
+      <tr>
+        <td>${h.player}</td>
+        <td>${h.category}</td>
+        <td>${h.team}</td>
+        <td>${formatMoney(h.bid)}</td>
+      </tr>`;
+    tbody.insertAdjacentHTML("beforeend", row);
+  });
 }
 
 function sellPlayer() {
   const team = document.getElementById("teamSelect").value;
   const bid = Number(document.getElementById("bidAmount").value);
-
   if (!team || !bid) {
-    alert("Please select team and enter bid amount");
+    alert("Select team & enter bid");
     return;
   }
-
   if (wallets[team] < bid) {
-    alert("Insufficient wallet balance!");
+    alert("Insufficient wallet balance");
     return;
   }
 
-  history.push({
-    playerIndex: currentIndex,
-    team: team,
-    bid: bid
-  });
+  const p = players[currentIndex];
 
   wallets[team] -= bid;
+
+  history.push({
+    player: p.name,
+    category: p.category,
+    team: team,
+    bid: bid,
+    playerIndex: currentIndex
+  });
 
   document.getElementById("statusMsg").innerText =
     `SOLD to ${team} for ${formatMoney(bid)}`;
 
-  currentIndex++;
+  renderHistory();
 
+  currentIndex++;
   if (currentIndex < players.length) {
     setTimeout(loadPlayer, 800);
   } else {
@@ -84,9 +99,10 @@ function undoSale() {
   }
 
   const last = history.pop();
-  currentIndex = last.playerIndex;
   wallets[last.team] += last.bid;
+  currentIndex = last.playerIndex;
 
+  renderHistory();
   loadPlayer();
 
   document.getElementById("statusMsg").innerText =
