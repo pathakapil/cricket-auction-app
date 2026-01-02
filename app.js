@@ -10,13 +10,14 @@ let history = [];
 
 function loadPlayer() {
   const p = players[currentIndex];
+
   document.getElementById("playerName").innerText = p.name;
   document.getElementById("playerCategory").innerText = p.category;
   document.getElementById("basePrice").innerText =
     "₹ " + p.base.toLocaleString("en-IN");
 
-  document.getElementById("bidAmount").value = "";
   document.getElementById("teamSelect").value = "";
+  document.getElementById("bidAmount").value = "";
   document.getElementById("statusMsg").innerText = "Status: READY";
 }
 
@@ -40,3 +41,21 @@ function sellPlayer() {
     setTimeout(loadPlayer, 800);
   } else {
     document.getElementById("statusMsg").innerText =
+      "Auction Completed 🎉";
+  }
+}
+
+function undoSale() {
+  if (history.length === 0) {
+    alert("Nothing to undo");
+    return;
+  }
+
+  currentIndex = history.pop();
+  loadPlayer();
+
+  document.getElementById("statusMsg").innerText =
+    "Last sale undone";
+}
+
+window.onload = loadPlayer;
